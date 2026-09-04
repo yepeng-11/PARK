@@ -378,6 +378,26 @@ The protocol separately defines a speech feature-corruption detector and a
 smile score-conflict detector, preserves v1 risk rejection and fail-closed
 behavior, and locks eight promotion criteria before v2 training begins.
 
+Train the two v2 specialist detectors under the frozen nested protocol with:
+
+```bash
+python tools/train_fusion_agent_v2_specialists.py \
+  --device cuda \
+  --paired-seeds 101,202,303,404,505 \
+  --mc-trials 30 \
+  --output-dir results/fusion_agent_v2_specialists
+```
+
+Each outer fold uses one predeclared paired-model seed. Four inner folds select
+histogram-gradient-boosting hyperparameters using synthetic corruption targets
+only; the outer fold reports corruption-detection generalization. No locked
+Test participant is predicted or scored. In the completed run, speech-noise
+detection AUROC was 1.0000 +/- 0.0000 with zero clean false positives, while
+smile-conflict detection AUROC was 0.8721 +/- 0.0215 with a 0.1253 clean false
+positive rate. The perfect synthetic speech result must not be interpreted as
+real-world noise performance. All protected base models and scalers were
+unchanged.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
