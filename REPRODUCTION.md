@@ -433,6 +433,40 @@ acceptance decisions are the interpretable outputs. Any further routing redesign
 must be declared as a new protocol version rather than tuned against these now
 observed outer-fold results.
 
+## Fusion Agent v3 frozen protocol
+
+V3 is a new, failure-driven protocol rather than a post-hoc adjustment to v2.
+Freeze it before implementing the new router with:
+
+```bash
+python tools/freeze_fusion_agent_v3_protocol.py \
+  --output-dir results/fusion_agent_v3_protocol
+```
+
+The frozen protocol hash is
+`263dd02d41ad5157092d9770e919bd0674cc7f5012eecb2dfbfe944a69031d73`.
+It retains 632 eligible development participants and 757 sessions, passes all
+23 participant-isolation checks, and creates no Test or external-cohort
+predictions. The v2 outer outcomes are explicitly registered as exposed. Thus,
+changing the fold seed does not create a new unbiased holdout: reused Train+Dev
+cross-validation may develop or reject v3, but it cannot promote it.
+
+V3 replaces the v2 rule "detect conflict, then switch" with a cross-fitted
+expected-regret router. Inner-train out-of-fold labels supervise action-specific
+loss models; labels and participant identifiers are forbidden at inference.
+Allowed actions are fail-closed availability-weighted fusion, dropping smile,
+UFNet fallback, conservative smile shrinkage, and abstention. A non-default
+action is permitted only when its participant-bootstrap lower confidence bound
+for regret improvement is positive. Risk rejection, an 80% clean coverage
+floor, a 20% clean non-default route-rate cap, and fail-closed behavior remain
+frozen.
+
+The eight internal criteria are rejection checks, not a promotion gate. Even if
+all pass, final promotion requires one newly collected participant-disjoint
+cohort with at least 100 participants and at least 25 participants per class.
+Its labels must remain hidden until the v3 policy and analysis code are frozen,
+and it may be evaluated only once.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
