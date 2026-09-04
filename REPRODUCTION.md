@@ -317,6 +317,42 @@ released PKLs do not embed a checkpoint hash. This acceptance scope covers the
 2026 paper's released-checkpoint evaluation; full from-scratch 30-seed training
 remains a separate scope.
 
+## Fusion Agent v1
+
+Fusion Agent v1 is an experimental, auditable wrapper around the paired PARK
+experts. Run the five-seed evaluation with:
+
+```bash
+python tools/evaluate_fusion_agent_v1.py \
+  --device cuda \
+  --seeds 101,202,303,404,505 \
+  --mc-trials 30 \
+  --output-dir results/fusion_agent_v1
+```
+
+The agent fits synthetic-corruption quality detectors on Train, selects routing
+rules and a risk threshold on Dev, and uses internal-test labels only for the
+final diagnostic evaluation. It defaults to the availability-aware Dev-AUROC
+weighted score, renormalizes around missing modalities, can downweight degraded
+speech, can fall back to UFNet for a high-confidence smile conflict, and can
+abstain on high-risk cases. A hard 5% clean-Dev route-rate limit and clean-AUROC
+non-inferiority constraint prevent an aggressive gate from being selected. If
+no active rule also improves Dev stress macro-AUROC, the score router fails
+closed to the availability-aware baseline.
+
+In the completed five-seed run, four seeds failed closed and one selected a
+low-trigger smile fallback. The full-coverage router was not promoted: clean
+participant AUROC was 0.8666 versus 0.8689 for available-weighted fusion, and
+stress macro-AUROC was 0.7858. The selective policy was retained for genuinely
+unseen external validation: clean selective AUROC was 0.8913 at 84.2% coverage,
+and stress selective macro-AUROC was 0.8316 at 66.0% mean coverage. These are
+diagnostic results because the current internal test has prior analytical
+exposure; they are not an unbiased final performance claim.
+
+Outputs under `results/fusion_agent_v1/` include per-run frozen agent pickles,
+Dev tuning audits, route and abstention audits, full and selective metrics,
+`selection_decision.json`, and `FUSION_AGENT_V1_REPORT.md`.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
