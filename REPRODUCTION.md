@@ -353,6 +353,31 @@ Outputs under `results/fusion_agent_v1/` include per-run frozen agent pickles,
 Dev tuning audits, route and abstention audits, full and selective metrics,
 `selection_decision.json`, and `FUSION_AGENT_V1_REPORT.md`.
 
+## Fusion Agent v2 frozen protocol
+
+Before training v2, freeze its nested development protocol with:
+
+```bash
+python tools/freeze_fusion_agent_v2_protocol.py \
+  --output-dir results/fusion_agent_v2_protocol
+```
+
+The protocol admits only eligible participants from the original Train+Dev
+pool. It creates five stratified participant-level outer folds and four inner
+folds inside every outer-training partition. All existing internal and external
+test cohorts remain locked. One identifier with inconsistent labels across two
+sessions is quarantined in full rather than resolved by majority vote; the
+private exclusion and fold manifests remain on the experiment server.
+
+The frozen development pool contains 632 participants, 757 sessions, and 160
+positive participants. All 23 leakage checks pass. The protocol records a
+deterministic canonical SHA-256 over its source data, generator, splits,
+perturbations, criteria, and other frozen settings. The final hash is
+`c07666342e8271ec53cf2d0d6ded0463701eba1c03d7ed86d3e296a535bc380c`.
+The protocol separately defines a speech feature-corruption detector and a
+smile score-conflict detector, preserves v1 risk rejection and fail-closed
+behavior, and locks eight promotion criteria before v2 training begins.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
