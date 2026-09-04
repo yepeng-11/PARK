@@ -398,6 +398,41 @@ positive rate. The perfect synthetic speech result must not be interpreted as
 real-world noise performance. All protected base models and scalers were
 unchanged.
 
+Train and audit the v2 router after the specialists have completed with:
+
+```bash
+python tools/train_fusion_agent_v2_router.py \
+  --device cuda \
+  --mc-trials 30 \
+  --output-dir results/fusion_agent_v2_router
+```
+
+The router is selected strictly inside each outer-training partition. Its
+candidate actions are speech downweighting, no smile action, smile dropping,
+or a UFNet fallback; unavailable modalities are handled separately from quality
+failures. If no candidate satisfies the frozen inner-fold constraints, routing
+fails closed to availability-weighted fusion. The run generates no released
+Test or external-cohort predictions.
+
+The completed five-fold, 30-Monte-Carlo run did not meet the frozen promotion
+gate: 4/8 criteria passed, and all five outer folds selected the fail-closed
+availability-weighted baseline. Clean non-inferiority, clean coverage (0.8544),
+the calibration guard, and fold stability passed. Stress superiority over
+availability-weighted fusion (delta 0.0000), stress superiority over UFNet
+(-0.0088), speech-noise gain (-0.0137), and smile-conflict non-inferiority
+(-0.0671 versus the required -0.0100) failed. Therefore Fusion Agent v2 is not
+promoted to unseen external evaluation.
+
+Mean clean outer-fold AUROC was 0.9624 for both the router and the
+availability-weighted baseline, versus 0.9632 for UFNet. On smile conflict it
+was 0.8763 for the router and baseline versus 0.9434 for UFNet. Because the
+released paired disease models were not retrained inside each outer fold, some
+outer participants may have contributed to those base models; absolute AUROCs
+are consequently optimistic. Within-fold routing deltas and the predeclared
+acceptance decisions are the interpretable outputs. Any further routing redesign
+must be declared as a new protocol version rather than tuned against these now
+observed outer-fold results.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
