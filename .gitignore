@@ -1,0 +1,7 @@
+# Local Python build artifacts
+__pycache__/
+*.py[cod]
+
+# Reproduction outputs may contain row-level predictions or participant IDs.
+results/
+
