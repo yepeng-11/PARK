@@ -467,6 +467,36 @@ cohort with at least 100 participants and at least 25 participants per class.
 Its labels must remain hidden until the v3 policy and analysis code are frozen,
 and it may be evaluated only once.
 
+Train the expected-regret router with:
+
+```bash
+python tools/train_fusion_agent_v3_router.py \
+  --device cuda \
+  --mc-trials 30 \
+  --bootstrap-replicates 1000 \
+  --output-dir results/fusion_agent_v3_router_v3_1
+```
+
+The first implementation used only fixed regret margins up to 0.02. Although
+its inner-OOF regret lower bounds were positive, every candidate exceeded the
+frozen 20% clean action budget, so all five folds correctly failed closed and
+the run passed 6/8 checks. This candidate-space omission was retained as an
+audited initial result. Revision v3.1 added label-free margin candidates from
+predeclared quantiles of each fold's inner-OOF clean predicted-improvement
+distribution; it did not change the protocol, metrics, or acceptance limits.
+
+In the completed v3.1 run, four of five folds enabled learned routing and the
+mean clean non-default action rate was 0.1216. Stress log-loss regret improved
+by 0.0393 and the participant-bootstrap improvement lower bound was 0.0333.
+However, clean AUROC fell by 0.0067 against the allowed 0.005 margin, only 2/5
+folds met clean non-inferiority, and smile-reliability AUROC remained 0.0170
+below the best fixed comparator. Consequently only 5/8 internal rejection
+checks passed. V3.1 is rejected and is not eligible for external evaluation.
+The opposite-consensus and rank-permutation stress AUROCs improved from 0.7337
+to 0.8954 and from 0.9174 to 0.9391, respectively, but those gains do not
+override the frozen clean and smile-reliability failures. Further adaptation to
+these observed results requires a separately declared protocol version.
+
 ## Safety
 
 Run training only from an isolated experiment copy. The original scripts save
