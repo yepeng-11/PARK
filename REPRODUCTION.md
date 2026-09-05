@@ -519,7 +519,14 @@ end-to-end nested-router runtime estimate. The clean base-model layered OOF
 scheduler was subsequently completed on one outer fold; see
 [NESTED_OOF_PILOT.md](NESTED_OOF_PILOT.md). Its 21 suites trained 84 networks
 in 258.616 seconds, with actual membership, epoch histories, hashes and target
-coverage verified. Layered specialist and router training remain to be integrated.
+coverage verified. Layered specialist and router training were subsequently
+integrated and evaluated across all five outer folds, as documented in
+[NESTED_AGENT_V4.md](NESTED_AGENT_V4.md). The run trained 105 base suites / 420
+networks, covered 632 development participants and passed the independent
+membership and saved-inference audit. Six of nine internal criteria passed;
+stress log-loss regret, smile-feature superiority and the bootstrap gain lower
+bound failed. Clean AUROC was 0.8884 versus 0.8905 for the new available-mean
+baseline. These are development results and do not authorize promotion.
 
 Run training only from an isolated experiment copy. The original scripts save
 models directly under `models/` and rewrite intermediate data and prediction
