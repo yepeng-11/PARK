@@ -499,6 +499,28 @@ these observed results requires a separately declared protocol version.
 
 ## Safety
 
+### Subsequent implementation audit (2026-09-05)
+
+The v3.1 figures above describe the executed implementation, not a fully
+protocol-compliant nested evaluation. A subsequent audit identified missing
+calibration, dependency leakage between stacked OOF layers, reused base models,
+and stale risk scores after margin selection. Consequently the failed checks
+do not establish that expected-regret routing itself is ineffective. See
+[V3_IMPLEMENTATION_AUDIT.md](V3_IMPLEMENTATION_AUDIT.md) for evidence, corrective
+training boundaries, and a conditional 105-pipeline single-seed resource plan.
+No training code or historical result was changed during that audit.
+
+A subsequent isolated base-training pilot is documented in
+[FOLD_TRAINING_PILOT.md](FOLD_TRAINING_PILOT.md). It retrains three experts and
+UFNet with separate participant groups for optimization, checkpoint selection,
+calibration, and prediction. The measured training/prediction interval was
+6.839 seconds on an RTX 2080 Ti; this excludes data preparation and is not an
+end-to-end nested-router runtime estimate. The clean base-model layered OOF
+scheduler was subsequently completed on one outer fold; see
+[NESTED_OOF_PILOT.md](NESTED_OOF_PILOT.md). Its 21 suites trained 84 networks
+in 258.616 seconds, with actual membership, epoch histories, hashes and target
+coverage verified. Layered specialist and router training remain to be integrated.
+
 Run training only from an isolated experiment copy. The original scripts save
 models directly under `models/` and rewrite intermediate data and prediction
 files.
