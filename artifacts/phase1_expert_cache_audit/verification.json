@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "cache": "/root/autodl-tmp/experiments/UFNet_AAAI25_repro/artifacts/expert_cache_mc30_seed20260908",
+  "repeat": "/root/autodl-tmp/experiments/UFNet_AAAI25_repro/artifacts/expert_cache_mc30_seed20260908_repeat",
+  "expected_rows": {
+    "train": 690,
+    "validation": 215,
+    "test": 197
+  },
+  "expected_participants": {
+    "train": 516,
+    "validation": 167,
+    "test": 162
+  },
+  "expected_feature_dimensions": {
+    "finger": 232,
+    "speech": 1024,
+    "smile": 42
+  },
+  "repeat_hashes_equal": true,
+  "checks": {
+    "metadata_pass": true,
+    "row_counts_exact": true,
+    "participant_counts_exact": true,
+    "participant_disjoint": true,
+    "feature_dimensions_exact": true,
+    "all_numeric_arrays_finite": true,
+    "labels_binary": true,
+    "row_ids_unique": true,
+    "repeat_metadata_array_hashes_equal": true,
+    "repeat_split_arrays_equal": true
+  }
+}

@@ -531,3 +531,33 @@ baseline. These are development results and do not authorize promotion.
 Run training only from an isolated experiment copy. The original scripts save
 models directly under `models/` and rewrite intermediate data and prediction
 files.
+
+## Phase 1: frozen expert cache
+
+Phase 1 freezes a common input and uncertainty interface for every later fusion
+model. The three released experts are single-layer `ShallowANN` models, so they
+do not expose a learned penultimate embedding. The cache therefore stores the
+exact fold-compatible, preprocessed expert input together with 30-pass
+MC-dropout mean, standard deviation, deterministic probability, predictive
+entropy, and mutual information.
+
+```bash
+python tools/export_ufnet_expert_cache.py \
+  --repo official_ufnet_audit_source \
+  --manifest artifacts/ufnet_paper_aligned_manifest_portable/paper_session_manifest.csv \
+  --output artifacts/expert_cache_mc30_seed20260908 \
+  --seed 20260908 \
+  --mc-trials 30 \
+  --device cuda
+
+python tools/verify_ufnet_expert_cache.py \
+  --cache artifacts/expert_cache_mc30_seed20260908 \
+  --repeat artifacts/expert_cache_mc30_seed20260908_repeat \
+  --output artifacts/expert_cache_mc30_seed20260908/verification
+```
+
+The server run passed exact manifest matching, the 690/215/197 row and
+516/167/162 participant counts, participant disjointness, finite-array and
+shape checks. A complete same-seed repeat was equal array-for-array. Cache
+payloads and participant indexes remain server-side; only aggregate audit files
+are kept in `artifacts/phase1_expert_cache_audit/`.

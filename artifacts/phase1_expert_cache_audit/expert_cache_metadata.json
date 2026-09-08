@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "source_repository": "https://github.com/ROC-HCI/UFNet.git",
+  "source_commit": "5ece2c65ba184faccf6c8cdccdc03132427c464b",
+  "seed": 20260908,
+  "mc_trials": 30,
+  "batch_size": 1024,
+  "device": "cuda",
+  "modalities": [
+    "finger",
+    "speech",
+    "smile"
+  ],
+  "model_tags": [
+    "finger_model_both_hand_fusion_baal",
+    "fox_model_best_auroc_baal",
+    "facial_expression_smile_best_auroc_baal"
+  ],
+  "expert_architecture": "ShallowANN: Linear -> MC Dropout -> Sigmoid",
+  "representation_definition": "exact preprocessed expert input; released experts have no penultimate hidden layer",
+  "cache_semantics": "one frozen MC-dropout draw set shared by all downstream fusion models",
+  "feature_dimensions": {
+    "finger": 232,
+    "speech": 1024,
+    "smile": 42
+  },
+  "dropped_correlated_columns": {
+    "finger": [],
+    "speech": [],
+    "smile": []
+  },
+  "split_counts": {
+    "train": {
+      "rows": 690,
+      "participants": 516
+    },
+    "validation": {
+      "rows": 215,
+      "participants": 167
+    },
+    "test": {
+      "rows": 197,
+      "participants": 162
+    }
+  },
+  "array_sha256": {
+    "finger": {
+      "features": "597f5e1b069ea73cd4e9119f98b5257043d74d426872c4b25b925e0f077c7dd7",
+      "mean": "0d23ee0093854351e46167d15c8f325a54c58462f6ee24a0576577ae6d938d1b",
+      "std": "a2eade45c74d7064663957e477251fd3fcd17dd8aab08839900ba477bfebc4d1",
+      "deterministic_probability": "134760bd81e03b4d1090f908dfc718f9d220fdd03e72e72579f585eb008570d4",
+      "predictive_entropy": "95d7dea9362b632736044959545b6c679e2bb833704d284529c1d53b73f77639",
+      "mutual_information": "b27753f70aec8a08e5a3351fa86ebd8fcfb10108d1f01360f069507179d9e6df"
+    },
+    "speech": {
+      "features": "2d0d35637509293b43fe3a9e938f3493bb33d74cc5e5c17c6160e5cd05139cde",
+      "mean": "f24978bb380e89635a5bacd745f942b28da0a36a6339a16d47086b2a009c126f",
+      "std": "a2624db49a9c7976dee3b4c0bcd6cecf575c2c0809bc77411f465fe878b56c37",
+      "deterministic_probability": "b744752669243ed23695476922e5671fccf3436af2b8b2bbe3ade51154954f9e",
+      "predictive_entropy": "399322c9710ce38fde5004fba384f2eccbe3df52e5a927f4a00167beed6652ec",
+      "mutual_information": "bc08e70b0dc2d3fc327b3bb72c62e1ec0704c2aaba0213bd75d3f2800d9cddbf"
+    },
+    "smile": {
+      "features": "f3394965c4e03e42a754cded85e7217238a7d4c8636b7d36188ea934aca67d29",
+      "mean": "2446a37c596af91777416872e3be08331443e78453ce5dea79ef7840fbe193f2",
+      "std": "a2ce8fb57029dd47f4d9f5fdfb33d1b74477149598ad0eced193c07958ea40a1",
+      "deterministic_probability": "befe5772458e46c5b855b5fe3f295184c4239d456abb5b77239d325f93775667",
+      "predictive_entropy": "8a7c39b6b3ba99371ed103403e4d6721a6faef35c9f54edd9ec5405510b95f70",
+      "mutual_information": "731a97ebe8d1096b8d26e909cec1ff951ca2cacca705f4f053a1361bf7f5321c"
+    }
+  },
+  "checks": {
+    "manifest_exact_match": true,
+    "all_labels_consistent": true,
+    "all_ids_consistent": true,
+    "all_arrays_finite": true
+  }
+}

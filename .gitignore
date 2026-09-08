@@ -24,3 +24,6 @@ artifacts/ufnet_paper_aligned_manifest/paper_session_manifest.csv
 artifacts/ufnet_paper_aligned_manifest/paper_participant_manifest.csv
 artifacts/ufnet_paper_aligned_manifest/paper_modality_presence_and_exclusions.csv
 artifacts/ufnet_paper_aligned_manifest/MANIFEST_SHA256SUMS.txt
+
+# Phase 1 cache payloads contain participant IDs and model-ready features.
+artifacts/expert_cache_*/

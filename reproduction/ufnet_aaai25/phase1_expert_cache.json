@@ -1,0 +1,26 @@
+{
+  "phase": "phase_1_frozen_expert_cache",
+  "source_commit": "5ece2c65ba184faccf6c8cdccdc03132427c464b",
+  "manifest": "artifacts/ufnet_paper_aligned_manifest_portable/paper_session_manifest.csv",
+  "seed": 20260908,
+  "mc_trials": 30,
+  "device": "cuda",
+  "splits": {
+    "train": {"rows": 690, "participants": 516},
+    "validation": {"rows": 215, "participants": 167},
+    "test": {"rows": 197, "participants": 162}
+  },
+  "representations": {
+    "finger": 232,
+    "speech": 1024,
+    "smile": 42
+  },
+  "uncertainty_fields": [
+    "mean",
+    "std",
+    "deterministic_probability",
+    "predictive_entropy",
+    "mutual_information"
+  ],
+  "note": "The released ShallowANN experts have no penultimate hidden layer, so the exact preprocessed expert input is the frozen representation."
+}
