@@ -1,0 +1,43 @@
+{
+  "prior_server_repository": {
+    "remote": "https://github.com/ROC-HCI/PARK.git",
+    "commit": "c129e9f16c24ebba7248ebef5bc34666cbeade92",
+    "fusion_rows": 1119,
+    "fusion_unique_participants": 909,
+    "fusion_unique_date_keys": 1079,
+    "official_cohort_rows_in_park": 1055,
+    "official_cohort_unique_date_keys_in_park": 1015,
+    "added_participants_vs_official": 64,
+    "dev_ids": 120,
+    "test_ids_nonempty": 392,
+    "test_ids_unique": 391,
+    "sha256": {
+      "data/finger_tapping/data_finger_tapping.csv": "e7f23db8630913bc9dabf45ff7699e623385fc60c307fc1df27776f548e0686d",
+      "data/facial_expression_smile/data_smile.csv": "c3a6831245665b4b9e236acf7bd2275b7079836d51e252f9e7e104e296c50b66",
+      "data/quick_brown_fox/data_speech.csv": "2ecc2b2f6dcb53b9afcc484fcb29788fc79778b2249ae416ea9b1547323dadf7",
+      "data/full_fusion_dataset.csv": "3892d38435c493c447931845ecfd55aae2eecd2943ee188450bb886a2b2f1f00",
+      "data/dev_set_participants.txt": "b761f87106fc89ad0538fdce3784e0783e39ae6fb180d1f7ff3fdc0cab0f336c",
+      "data/test_set_participants.txt": "89e79955a1a11c5359776ebcc19ef77342331e035430b80e5b0d47292c49eeb7"
+    }
+  },
+  "paper_aligned_repository": {
+    "remote": "https://github.com/ROC-HCI/UFNet.git",
+    "commit": "5ece2c65ba184faccf6c8cdccdc03132427c464b",
+    "fusion_rows": 1102,
+    "fusion_unique_participants": 845,
+    "fusion_unique_date_keys": 1013,
+    "train_participants": 516,
+    "validation_participants": 167,
+    "test_participants": 162,
+    "train_sessions": 690,
+    "validation_sessions": 215,
+    "test_sessions": 197
+  },
+  "split_membership_comparison": {
+    "park_dev_ids_in_official_cohort": 70,
+    "park_test_ids_in_official_cohort": 212,
+    "same_as_official_validation": 13,
+    "same_as_official_test": 40,
+    "park_dev_test_overlap": 0
+  }
+}

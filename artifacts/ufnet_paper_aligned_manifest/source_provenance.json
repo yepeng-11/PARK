@@ -1,0 +1,47 @@
+{
+  "source_repository": "https://github.com/ROC-HCI/UFNet.git",
+  "source_checkout": "official_ufnet_audit_source",
+  "git_commit": "5ece2c65ba184faccf6c8cdccdc03132427c464b",
+  "hash_algorithm": "sha256",
+  "files": {
+    "data/all_task_ids.txt": "6e266d3c74427e95a693aedadce0e213c88fe5eeb72733cfa52dc8f33c746244",
+    "data/dev_set_participants.txt": "392a49c11eab51203418354a76aebc84879550f29935a9de9d1a56be098681a9",
+    "data/test_set_participants.txt": "e79f05a86b2c4f1bd370e08ff4c70d997668d36a8d591f72ada26ba21ad6c277",
+    "data/demography_details.csv": "88dcba3fded66f7e11e083bcd50a6bf247e66d30b542628ff95f37d7fe2baf96",
+    "data/finger_tapping/features_demography_diagnosis_Nov22_2023.csv": "43a310c7aa55ec6435057f07f69046f63080d24155c97d18cee93d3c089fe955",
+    "data/facial_expression_smile/facial_dataset.csv": "0e1be9eba592e70c8cb837070d129028a5ceedc2422669e18ea61363fa2e3acb",
+    "data/quick_brown_fox/wavlm_fox_features.csv": "d675c7ce90890035736c13dafb0776dff70a96f9c9df3284145f189cbf14c640",
+    "code/fusion_models/ufnet/UFNet_no_withhold.py": "4cff22603791ff7e1db07036448e7554a4cdec4733278f678d0a152783371bd4"
+  },
+  "official_list_sizes": {
+    "all_task_ids": 845,
+    "dev_all_tasks_or_unimodal": 267,
+    "test_all_tasks_or_unimodal": 267,
+    "all_task_intersection_dev": 167,
+    "all_task_intersection_test": 162,
+    "all_task_train_remainder": 516
+  },
+  "modality_counts": {
+    "finger_raw_rows": 3177,
+    "finger_complete_rows": 3060,
+    "finger_both_hand_sessions": 1374,
+    "finger_both_hand_participants": 1167,
+    "smile_raw_rows": 1684,
+    "smile_complete_rows": 1684,
+    "smile_participants": 1357,
+    "speech_raw_rows": 1821,
+    "speech_complete_rows": 1655,
+    "speech_participants": 1265
+  },
+  "checks": {
+    "exact_paper_counts": true,
+    "participant_lists_unique": true,
+    "dev_test_disjoint_within_fusion_cohort": true,
+    "all_session_ids_consistent": true,
+    "all_session_labels_consistent": true,
+    "all_sessions_in_all_task_list": true,
+    "all_listed_participants_have_sessions": true,
+    "unique_manifest_row_ids": true,
+    "no_duplicate_source_combinations": true
+  }
+}

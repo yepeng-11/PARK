@@ -1,0 +1,69 @@
+protocol_name: ufnet_aaai25_paper_aligned_v1
+frozen_at: "2026-09-08"
+
+source:
+  repository: https://github.com/ROC-HCI/UFNet
+  commit: 5ece2c65ba184faccf6c8cdccdc03132427c464b
+  input_level: author_released_extracted_features
+  raw_video_available: false
+
+cohort:
+  definition: intersection of all_task_ids with complete finger-both-hands, speech, and smile rows using released loading code
+  join_key: participant_id#YYYY-MM-DD
+  preserve_same_day_cartesian_combinations: true
+  participants: 845
+  rows: 1102
+
+official_split:
+  unit: participant
+  train: {participants: 516, rows: 690}
+  validation: {participants: 167, rows: 215}
+  test: {participants: 162, rows: 197}
+  overlap_allowed: false
+  model_selection_uses_test: false
+
+training:
+  fusion_model: UFNet_no_withhold
+  coverage: 1.0
+  threshold: 0.5
+  final_seeds: [870, 782, 563, 879, 585, 800, 485, 710, 821, 622, 524, 987, 812, 784, 733, 819, 900, 604, 122, 958, 346, 986, 701, 595, 253, 771, 548, 580, 856, 242]
+  hyperparameters:
+    learning_rate: 0.020724443604128343
+    dropout_prob: 0.495989214406461
+    num_trials: 30
+    uncertainty_weight: 81.81790352752515
+    random_state: 357
+    batch_size: 1024
+    num_epochs: 164
+    hidden_dim: 512
+    query_dim: 64
+    last_hidden_dim: 128
+    optimizer: SGD
+    momentum: 0.6897821582954526
+    use_scheduler: false
+
+evaluation:
+  positive_label: 1
+  score: predicted_probability
+  point_estimate_unit: session_row
+  primary_metric: AUROC
+  secondary_metrics: [AUPRC, F1, balanced_accuracy, sensitivity, specificity, Brier, ECE]
+  ece_bins: 20
+  seed_summary: [mean, sample_standard_deviation, minimum, maximum, normal_approximation_95_percent_CI]
+  main_result_requires_100_percent_coverage: true
+  rejection_results_are_secondary: true
+
+comparison_statistics:
+  method: paired_cluster_bootstrap
+  resampling_unit: participant
+  resamples: 10000
+  random_seed: 20260908
+  interval: percentile_95_percent
+  compare_against: strongest_baseline_under_identical_split_and_preprocessing
+
+leakage_guards:
+  participant_disjoint: true
+  preprocessing_fit_on_training_only: true
+  validation_only_for_tuning_and_early_stopping: true
+  identical_rows_and_splits_for_all_fusion_models: true
+  test_evaluated_after_configuration_freeze: true

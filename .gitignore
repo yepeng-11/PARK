@@ -4,4 +4,23 @@ __pycache__/
 
 # Reproduction outputs may contain row-level predictions or participant IDs.
 results/
+!reproduction/ufnet_aaai25/results/
+!reproduction/ufnet_aaai25/results/summary.json
+!reproduction/ufnet_aaai25/results/per_seed_metrics.csv
 
+# Downloaded upstream snapshot and transfer bundles are reproducible, but too large for Git.
+official_ufnet_audit_source/
+ufnet_paper_aligned_reproduction_bundle.tar.gz
+
+# Local credentials and run logs must never be committed.
+.env
+.env.*
+*.pem
+*.key
+*.log
+
+# Frozen row-level manifests remain local/server-side; publish only aggregate audits.
+artifacts/ufnet_paper_aligned_manifest/paper_session_manifest.csv
+artifacts/ufnet_paper_aligned_manifest/paper_participant_manifest.csv
+artifacts/ufnet_paper_aligned_manifest/paper_modality_presence_and_exclusions.csv
+artifacts/ufnet_paper_aligned_manifest/MANIFEST_SHA256SUMS.txt
