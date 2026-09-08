@@ -561,3 +561,34 @@ The server run passed exact manifest matching, the 690/215/197 row and
 shape checks. A complete same-seed repeat was equal array-for-array. Cache
 payloads and participant indexes remain server-side; only aggregate audit files
 are kept in `artifacts/phase1_expert_cache_audit/`.
+
+## Phase 2: Feature Adapter development
+
+Phase 2 uses only the frozen train and validation caches; its executable does
+not load or accept the paper test cache. The fixed comparison contains an
+available-mean baseline, a scalar probability/uncertainty MLP, concatenated
+feature MLP, plain three-token Adapter-Transformer, and uncertainty-aware
+three-token Adapter-Transformer. Each learned model uses five fixed seeds,
+inverse-session participant weighting and validation participant log-loss early
+stopping.
+
+```bash
+python tools/train_ufnet_phase2_adapters.py \
+  --cache artifacts/expert_cache_mc30_seed20260908 \
+  --config reproduction/ufnet_aaai25/phase2_adapter_development.json \
+  --output results/phase2_adapter_development_v1 \
+  --device cuda
+
+python tools/audit_ufnet_phase2_results.py \
+  --results results/phase2_adapter_development_v1 \
+  --repeat results/phase2_adapter_development_v1_repeat \
+  --output results/phase2_adapter_development_v1/audit
+```
+
+On the 167-participant development validation split, the uncertainty-aware
+Adapter-Transformer ensemble reached AUROC 0.9534 and AUPRC 0.9116 versus
+0.9375/0.8945 for available-mean. Its paired AUROC delta was +0.0159 (95% CI
+-0.0016 to +0.0355). Against the strongest lightweight comparator, scalar MLP,
+the AUROC delta was +0.0057 (95% CI -0.0096 to +0.0233) while AUPRC changed by
+-0.0008. It is therefore promising but not confirmed, and the sealed test must
+not yet be opened. The complete run reproduced exactly under the same config.

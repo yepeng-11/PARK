@@ -1,0 +1,30 @@
+{
+  "phase": "phase_2_feature_adapter_development",
+  "input_cache": "artifacts/expert_cache_mc30_seed20260908",
+  "development_splits": ["train", "validation"],
+  "test_policy": "sealed_not_loaded",
+  "models": [
+    "scalar_mlp",
+    "concat_mlp",
+    "adapter_transformer",
+    "uncertainty_adapter_transformer"
+  ],
+  "seeds": [101, 202, 303, 404, 505],
+  "token_dim": 64,
+  "transformer_layers": 1,
+  "attention_heads": 4,
+  "dropout": 0.15,
+  "auxiliary_loss_weight": 0.1,
+  "batch_size": 64,
+  "max_epochs": 200,
+  "early_stopping_patience": 25,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "epoch_selection_metric": "validation_participant_log_loss",
+  "reporting_unit": "participant",
+  "session_loss_weighting": "inverse_sessions_per_participant",
+  "primary_metric": "AUROC",
+  "secondary_metric": "AUPRC",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260908
+}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "decision": "PROMISING_NOT_CONFIRMED",
+  "validation_only": true,
+  "test_loaded": false,
+  "repeat_outputs_exact": true,
+  "bootstrap_replicates": 2000,
+  "bootstrap_unit": "participant",
+  "primary_comparison": "uncertainty adapter vs scalar MLP",
+  "primary_AUROC_CI_low": -0.009582055838532019,
+  "primary_AUPRC_delta": -0.0008232442591886713
+}
