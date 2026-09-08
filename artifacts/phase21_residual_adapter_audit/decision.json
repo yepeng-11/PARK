@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "decision": "REJECT_FEATURE_RESIDUAL",
+  "test_loaded": false,
+  "same_configuration_repeat_exact": true,
+  "primary_unit": "session",
+  "bootstrap_cluster": "participant",
+  "selected_scales": {
+    "residual_adapter": 0.25,
+    "uncertainty_gated_residual_adapter": 0.1
+  },
+  "validation_AUROC_delta_vs_scalar": {
+    "residual_adapter": -0.006418485237484006,
+    "uncertainty_gated_residual_adapter": -0.005684944067485764
+  },
+  "reason": "Neither residual model improved validation AUROC over the scalar probability-and-uncertainty model; both participant-cluster bootstrap intervals crossed zero."
+}

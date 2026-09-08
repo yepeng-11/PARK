@@ -592,3 +592,26 @@ Adapter-Transformer ensemble reached AUROC 0.9534 and AUPRC 0.9116 versus
 the AUROC delta was +0.0057 (95% CI -0.0096 to +0.0233) while AUPRC changed by
 -0.0008. It is therefore promising but not confirmed, and the sealed test must
 not yet be opened. The complete run reproduced exactly under the same config.
+
+## Phase 2.1: constrained residual Feature Adapter
+
+Phase 2.1 tests whether the original 1298 feature dimensions add stable signal
+beyond the expert probability and uncertainty summaries. A frozen Scalar MLP
+provides the base logit; zero-initialized plain and uncertainty-gated Feature
+Adapters may add only a scaled residual. Residual scales 0.1, 0.25 and 0.5 are
+selected exclusively from five-fold, participant-disjoint train OOF results.
+Each fold uses a further inner tuning subset for epoch selection.
+
+One training participant has time-dependent labels (control in 2020 and PD in
+2022). Both sessions remain in the same fold and keep their observed labels;
+the ever-PD label is used only for fold stratification. Primary metrics remain
+session-level for paper alignment, while bootstrap resamples participant
+clusters.
+
+The train-only OOF AUROCs were 0.9488 for Scalar MLP, 0.9536 for the selected
+plain residual and 0.9501 for the selected uncertainty-gated residual. These
+gains did not transfer to validation: Scalar MLP reached 0.9306, versus 0.9242
+and 0.9249. The respective paired AUROC deltas were -0.0064 (95% CI -0.0236 to
++0.0114) and -0.0057 (95% CI -0.0261 to +0.0137). A full repeat reproduced all
+CSVs byte-for-byte. Both Feature Adapter variants are rejected, and the paper
+test remains sealed.

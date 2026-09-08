@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "test_loaded": false,
+  "device": "cuda",
+  "train_participants": 516,
+  "validation_participants": 167,
+  "participant_overlap": 0,
+  "selected_scales": {
+    "residual_adapter": 0.25,
+    "uncertainty_gated_residual_adapter": 0.1
+  },
+  "selection_source": "train-only participant-disjoint OOF with unchanged session labels",
+  "validation_role": "frozen check for this run; cohort was already exposed in Phase 2",
+  "longitudinal_label_changes_in_train": 1,
+  "primary_evaluation_unit": "session",
+  "bootstrap_cluster": "participant"
+}
