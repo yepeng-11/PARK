@@ -1,0 +1,43 @@
+{
+  "phase": "phase_3_one_time_official_test",
+  "status_before_run": "FROZEN_UNOPENED",
+  "test_contract": {
+    "sessions": 197,
+    "participants": 162,
+    "coverage": 1.0,
+    "threshold": 0.5,
+    "primary_unit": "session",
+    "bootstrap_cluster": "participant"
+  },
+  "primary_candidate": "uncertainty_adapter_transformer",
+  "primary_reference": "reproduced_UFNet_30_seed_mean",
+  "models": {
+    "available_mean": {"source": "frozen_expert_cache"},
+    "scalar_mlp": {"source": "phase2", "seeds": [101, 202, 303, 404, 505]},
+    "concat_mlp": {"source": "phase2", "seeds": [101, 202, 303, 404, 505]},
+    "adapter_transformer": {"source": "phase2", "seeds": [101, 202, 303, 404, 505]},
+    "uncertainty_adapter_transformer": {"source": "phase2", "seeds": [101, 202, 303, 404, 505]},
+    "residual_adapter": {"source": "phase21", "seeds": [101, 202, 303], "scale": 0.25},
+    "uncertainty_gated_residual_adapter": {"source": "phase21", "seeds": [101, 202, 303], "scale": 0.1}
+  },
+  "published_UFNet": {
+    "AUROC": 0.9281,
+    "accuracy": 0.8729,
+    "balanced_accuracy": 0.8639,
+    "F1": 0.8096,
+    "sensitivity": 0.7838,
+    "specificity": 0.9199
+  },
+  "reproduced_UFNet_30_seed_mean": {
+    "AUROC": 0.9272343821249429,
+    "AUPRC": 0.8618115925935228,
+    "accuracy": 0.8705583756345179,
+    "balanced_accuracy": 0.8617319393426235,
+    "F1": 0.8056539361488092,
+    "sensitivity": 0.7779411764705881,
+    "specificity": 0.9193798449612404
+  },
+  "bootstrap_replicates": 5000,
+  "bootstrap_seed": 20260908,
+  "decision_rule": "Report every frozen model; do not select or retune from test outcomes."
+}
