@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "protocol_sha256": "8203ca36bc41454a456b41a88e5157c8603429c1491bbac4115ac27044173dbf",
+  "test_sessions": 197,
+  "test_participants": 162,
+  "coverage": 1.0,
+  "threshold": 0.5,
+  "primary_candidate": "uncertainty_adapter_transformer",
+  "primary_minus_reproduced_UFNet": {
+    "AUROC": 0.004822161422708748,
+    "AUPRC": 0.020300042061235035,
+    "accuracy": 0.0076142131979693994,
+    "F1": 0.01252788203300903,
+    "sensitivity": 0.016176470588235348,
+    "specificity": 0.0031007751937983663,
+    "paper_weighted_accuracy": 0.00751148171000815
+  },
+  "no_test_time_selection_or_retuning": true,
+  "device": "cuda"
+}

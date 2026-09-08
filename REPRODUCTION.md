@@ -615,3 +615,24 @@ and 0.9249. The respective paired AUROC deltas were -0.0064 (95% CI -0.0236 to
 +0.0114) and -0.0057 (95% CI -0.0261 to +0.0137). A full repeat reproduced all
 CSVs byte-for-byte. Both Feature Adapter variants are rejected, and the paper
 test remains sealed.
+
+## Phase 3: one-time official test
+
+The test protocol and primary candidate were committed as `84bc6e4` before the
+official test was opened. The test contains the paper-aligned 197 sessions from
+162 participants; evaluation uses 100% coverage, threshold 0.5, session-level
+paper metrics and participant-cluster bootstrap. The preregistered primary model
+is the five-seed Uncertainty Adapter-Transformer ensemble from Phase 2.
+
+On this same-data comparison, the primary model reached AUROC 0.9321, AUPRC
+0.8821, accuracy 0.8788, F1 0.8182, sensitivity 0.7941 and specificity 0.9225.
+Relative to the reproduced 30-seed UFNet aggregate, its descriptive differences
+were +0.0048, +0.0203, +0.0076, +0.0125, +0.0162 and +0.0031, respectively.
+However, its AUROC was identical to available-mean (delta 0.0000; participant-
+cluster 95% CI -0.0242 to +0.0237). The result is classified as numeric
+improvement over UFNet but not statistically confirmed discrimination gain.
+
+The non-primary residual Adapter produced test AUROC 0.9341 but failed the
+earlier validation gate, so it is not promoted post hoc. The official test is
+now exposed and must not be used for further architecture or threshold
+selection.

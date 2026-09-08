@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "decision": "NUMERIC_IMPROVEMENT_NOT_STATISTICALLY_CONFIRMED",
+  "protocol_commit": "84bc6e4",
+  "primary_candidate": "uncertainty_adapter_transformer",
+  "test_sessions": 197,
+  "test_participants": 162,
+  "coverage": 1.0,
+  "primary_session_metrics": {
+    "AUROC": 0.9320568475450793,
+    "AUPRC": 0.8821116346547579,
+    "accuracy": 0.8781725888324873,
+    "F1": 0.8181818181818182,
+    "sensitivity": 0.7941176470588235,
+    "specificity": 0.9224806201550387
+  },
+  "primary_minus_reproduced_UFNet": {
+    "AUROC": 0.004822161422708748,
+    "AUPRC": 0.020300042061235035,
+    "accuracy": 0.007614213197969399,
+    "F1": 0.01252788203300903,
+    "sensitivity": 0.016176470588235348,
+    "specificity": 0.0031007751937983663
+  },
+  "primary_vs_available_mean_AUROC_delta": 0.0,
+  "primary_vs_available_mean_AUROC_95CI": [-0.02422441993632469, 0.023652464178869556],
+  "reason": "The preregistered primary model numerically exceeded the reproduced UFNet aggregate on every reported classification metric, but it did not improve AUROC over the same-cache available-mean baseline and paired UFNet predictions were unavailable for a significance interval."
+}
